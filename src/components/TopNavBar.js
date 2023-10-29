@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import '../css/TopNavBar.css';
+import { Link } from 'react-router-dom';
 import {
     MDBContainer,
     MDBNavbar,
@@ -29,18 +30,11 @@ export default function TopNavBar() {
                 <MDBCollapse navbar show={showNav}>
                     <MDBNavbarNav>
                         <MDBNavbarItem>
-                            <MDBNavbarLink active aria-current='page' href='#'>
-                                Home
-                            </MDBNavbarLink>
+                            <MDBNavbarLink active aria-current='page' href='/'>Products</MDBNavbarLink>
                         </MDBNavbarItem>
                         <MDBNavbarItem>
-                            <MDBNavbarLink href='#'>Products</MDBNavbarLink>
+                            <MDBNavbarLink active aria-current='page' href='/cart'>Cart</MDBNavbarLink>
                         </MDBNavbarItem>
-                        {/*<MDBNavbarItem>*/}
-                        {/*    <MDBNavbarLink disabled href='#' tabIndex={-1} aria-disabled='true'>*/}
-                        {/*        Disabled*/}
-                        {/*    </MDBNavbarLink>*/}
-                        {/*</MDBNavbarItem>*/}
                     </MDBNavbarNav>
                 </MDBCollapse>
             </MDBContainer>

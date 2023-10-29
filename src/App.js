@@ -6,10 +6,10 @@ import {FetchGetService} from "./services/FetchService";
 import {FetchPostService} from "./services/FetchService";
 import {GET_CATEGORIES, GET_ORDERS, GET_PRODUCTS} from "./utils/Urls"
 import ProductTable from "./components/ProductTable";
-// import Cart from "./components/Cart";
 import TopNavBar from "./components/TopNavBar";
 import 'bootstrap/dist/css/bootstrap.css';
-// import {CardTextProps} from "mdb-react-ui-kit/dist/types/free/components/Card/CardText/types";
+import {Route, Routes} from 'react-router-dom'
+import Cart from "./components/Cart";
 
 function App() {
     const [orders, setOrders] = useState([]);
@@ -50,17 +50,17 @@ function App() {
         fetchCategories()
     }, []);
 
+
+
     return (
         <div className="App">
             <TopNavBar />
-            <header className="App-header w-100">
-                {products.length > 0 ? (
-                    <ProductTable products={products} categories={categories} />
-                ) : (
-                    <p>Loading...</p>
-                )}
+            <header className="App-header w-75">
+                <Routes>
+                    <Route path="/" element={<ProductTable products={products} categories={categories} />} />
+                    <Route path="/cart" element={<Cart />} />
+                </Routes>
             </header>
-            {/*<Cart />*/}
         </div>
     );
 }

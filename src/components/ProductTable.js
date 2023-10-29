@@ -8,19 +8,61 @@ function switchProductIcon(category) {
         case 1:
             return <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS96mVnzQNDmWu65fo4LXL5jUx3qsWHTBFipz2evbD9Ww&s' alt='NotLoaded' style={{ width: '45px', height: '45px' }} className='rounded-circle' />;
         case 2:
-            return <img src='../../data/vegetables.png' alt='NotLoaded' style={{ width: '45px', height: '45px' }} className='rounded-circle' />;
+            return <img src='https://cdn-icons-png.flaticon.com/512/7910/7910612.png' alt='NotLoaded' style={{ width: '45px', height: '45px' }} className='rounded-circle' />;
         case 3:
-            return <img src='../../data/cereals.png' alt='NotLoaded' style={{ width: '45px', height: '45px' }} className='rounded-circle' />;
+            return <img src='https://cdn-icons-png.flaticon.com/512/498/498266.png' alt='NotLoaded' style={{ width: '45px', height: '45px' }} className='rounded-circle' />;
         case 4:
-            return <img src='../../data/meat.png' alt='NotLoaded' style={{ width: '45px', height: '45px' }} className='rounded-circle' />;
+            return <img src='https://icons.veryicon.com/png/o/food--drinks/fresh-1/meat-4.png' alt='NotLoaded' style={{ width: '45px', height: '45px' }} className='rounded-circle' />;
         case 5:
-            return <img src='../../data/dairy.jpg' alt='NotLoaded' style={{ width: '45px', height: '45px' }} className='rounded-circle' />;
+            return <img src='https://static.vecteezy.com/system/resources/previews/024/244/720/original/dairy-icon-in-illustration-vector.jpg' alt='NotLoaded' style={{ width: '45px', height: '45px' }} className='rounded-circle' />;
         default:
             return null;
     }
 }
 
 export default function ProductTable({ products, categories}) {
+    //Local storage
+    // State to manage your data
+    const [selectedProducts, setSelectedProducts] = useState('');
+
+    // Effect to load data from local storage on component mount
+    useEffect(() => {
+        const storedData = localStorage.getItem('selectedProducts');
+        if (storedData) {
+            // Deserialize the string back into an array
+            setSelectedProducts(JSON.parse(storedData));
+        }
+    }, []);
+
+    // Update products list and save to local storage
+    const updateProductsList = (newData) => {
+        setSelectedProducts(newData);
+        localStorage.setItem('myCart', JSON.stringify(newData));
+    };
+
+    // Buy button click
+    const handleBuyClick = (product) => {
+        // Ensure selectedProducts is an array
+        const currentProducts = Array.isArray(selectedProducts) ? selectedProducts : [];
+
+        // Check if the product is already in the cart
+        const existingProductIndex = currentProducts.findIndex((p) => p._id === product._id);
+
+        if (existingProductIndex !== -1) {
+            // If the product is already in the cart, update the quantity
+            const updatedProducts = [...currentProducts];
+            updatedProducts[existingProductIndex] = {
+                ...currentProducts[existingProductIndex],
+                quantity: currentProducts[existingProductIndex].quantity + 1,
+            };
+            updateProductsList(updatedProducts);
+        } else {
+            // If the product is not in the cart, add the product with quantity 1
+            const newProducts = [...currentProducts, { ...product, quantity: 1 }];
+            updateProductsList(newProducts);
+        }
+    };
+    //-------------------------------------------------------------//
 
     //Assign selected category from the dropdown menu function
     const [selectedCategory, setSelectedCategory] = useState(null);
@@ -93,7 +135,8 @@ export default function ProductTable({ products, categories}) {
                             </td>
                             <td>
                                 <div className='d-flex'>
-                                    <MDBBtn style={{ width: '50px', height: '30px' }}>
+                                    <MDBBtn style={{ width: '50px', height: '30px' }}
+                                            onClick={() => handleBuyClick(property)}>
                                         Buy
                                     </MDBBtn>
                                 </div>
