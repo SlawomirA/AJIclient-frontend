@@ -7,6 +7,7 @@ export const GET_CATEGORIES = "http://localhost:8080/categories";
 
 
 //POST
+export const POST_ODRERS = "http://localhost:8080/orders";
 
 
 //PUT

@@ -143,7 +143,7 @@ export default function Cart() {
                 </tr>
                 </tfoot>
             </MDBTable>
-            <PersonalDataForm />
+            <PersonalDataForm selectedProducts={selectedProducts}/>
         </div>
     );
 }

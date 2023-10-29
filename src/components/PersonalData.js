@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { MDBBtn, MDBContainer, MDBRow, MDBCol, MDBInput, MDBModal, MDBModalBody } from 'mdb-react-ui-kit';
 import Swal from "sweetalert2";
+import {POST_ODRERS} from "../utils/Urls";
 
 const PersonalDataForm = () => {
     const [formData, setFormData] = useState({
@@ -38,15 +39,7 @@ const PersonalDataForm = () => {
         let checks = nameCheck && emailCheck && phoneCheck;
         // let ok;
         if(checks)
-        {
-            Swal.fire({
-                icon: 'success',
-                title: 'Well done!',
-                text: 'Succesfully placed an order!',
-                footer: 'Confirmation'
-            })
-
-        }
+            postOrder()
         else
         {
             Swal.fire({
@@ -58,6 +51,64 @@ const PersonalDataForm = () => {
             })
         }
     };
+
+    const postOrder = async () => {
+        try {
+
+            const selectedProducts = JSON.parse(localStorage.getItem('myCart')) || [];
+
+            const productListString = Array.isArray(selectedProducts) ?
+                selectedProducts.map(product => `${product._id} ${product.quantity}`).join(', ') : '';
+
+            const response = await fetch(POST_ODRERS, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "date": "2023-09-28T12:00:00.000+00:00",
+                    "orderStatus": "1",
+                    "username": formData.name,
+                    "email": formData.email,
+                    "phoneNumber": formData.phoneNumber,
+                    "productList": productListString.toString(),
+                }),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Well done!',
+                    text: 'Succesfully placed an order!',
+                    footer: 'Confirmation'
+                })
+
+                return true;
+            } else {
+                console.error('Error posting order:', response.status, response.statusText);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'We encountered errors while placing an order.\n' +
+                        '',
+                    footer: 'Order post operation error'
+                })
+                return false;
+            }
+        } catch (error) {
+            console.error('Error posting order:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'We encountered errors while placing an order.\n' +
+                    '',
+                footer: 'Order post operation error'
+            })
+            return false;
+        }
+    };
+
 
     return (
         <MDBContainer>
