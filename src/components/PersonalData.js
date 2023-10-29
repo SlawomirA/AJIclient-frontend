@@ -20,9 +20,7 @@ const PersonalDataForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission logic here
         console.log('Form submitted:', formData);
-        // You can add further logic like sending the data to a server
     };
 
 
