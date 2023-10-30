@@ -45,8 +45,10 @@ const PersonalDataForm = () => {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'We\'ve encountered errors!\n' +
-                    '',
+                html: 'We\'ve encountered errors!<br/>' +
+                    (nameCheck?"":"Name validation error...<br/>")+
+                    (emailCheck?"":"Email validation error...<br/>")+
+                    (phoneCheck?"":"Phone validation error...<br/>"),
                 footer: 'Order validation error'
             })
         }
@@ -101,8 +103,7 @@ const PersonalDataForm = () => {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'We encountered errors while placing an order.\n' +
-                    '',
+                text: 'We encountered errors while placing an order.\n',
                 footer: 'Order post operation error'
             })
             return false;

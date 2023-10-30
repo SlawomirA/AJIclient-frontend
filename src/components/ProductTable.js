@@ -112,6 +112,7 @@ export default function ProductTable({ products, categories}) {
                     <tr>
                         <th scope='col'>Name</th>
                         <th scope='col'>Description</th>
+                        <th scope='col'>Weight</th>
                         <th scope='col'>Cost</th>
                         <th scope='col'>Action</th>
                     </tr>
@@ -129,6 +130,9 @@ export default function ProductTable({ products, categories}) {
                             </td>
                             <td>
                                 <p className='fw-normal mb-1'>{property.description}</p>
+                            </td>
+                            <td>
+                                <p className='fw-normal mb-1'>{property.weight}</p>
                             </td>
                             <td>
                                 <p className='fw-normal mb-1'>{property.price}</p>

@@ -12,19 +12,10 @@ import {Route, Routes} from 'react-router-dom'
 import Cart from "./components/Cart";
 
 function App() {
-    const [orders, setOrders] = useState([]);
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        const fetchOrders = async () => {
-            try {
-                const result = await FetchGetService(GET_ORDERS);
-                setOrders(result);
-            } catch (error) {
-                console.error("Error fetching orders:", error);
-            }
-        };
 
         const fetchProducts = async () => {
             try {
@@ -44,10 +35,8 @@ function App() {
             }
         };
 
-
-        fetchOrders();
         fetchProducts();
-        fetchCategories()
+        fetchCategories();
     }, []);
 
 
