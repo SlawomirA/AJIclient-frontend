@@ -1,33 +1,68 @@
-import React, {useEffect, useState} from 'react';
-import { MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
-import '../css/ProductTable.css';
+import React, { useEffect, useState } from "react";
+import { MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
+import "../css/ProductTable.css";
 
 function switchProductIcon(category) {
     //Check the category of product and return correct image
     switch (category) {
         case 1:
-            return <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS96mVnzQNDmWu65fo4LXL5jUx3qsWHTBFipz2evbD9Ww&s' alt='NotLoaded' style={{ width: '45px', height: '45px' }} className='rounded-circle' />;
+            return (
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS96mVnzQNDmWu65fo4LXL5jUx3qsWHTBFipz2evbD9Ww&s"
+                    alt="NotLoaded"
+                    style={{ width: "45px", height: "45px" }}
+                    className="rounded-circle"
+                />
+            );
         case 2:
-            return <img src='https://cdn-icons-png.flaticon.com/512/7910/7910612.png' alt='NotLoaded' style={{ width: '45px', height: '45px' }} className='rounded-circle' />;
+            return (
+                <img
+                    src="https://cdn-icons-png.flaticon.com/512/7910/7910612.png"
+                    alt="NotLoaded"
+                    style={{ width: "45px", height: "45px" }}
+                    className="rounded-circle"
+                />
+            );
         case 3:
-            return <img src='https://cdn-icons-png.flaticon.com/512/498/498266.png' alt='NotLoaded' style={{ width: '45px', height: '45px' }} className='rounded-circle' />;
+            return (
+                <img
+                    src="https://cdn-icons-png.flaticon.com/512/498/498266.png"
+                    alt="NotLoaded"
+                    style={{ width: "45px", height: "45px" }}
+                    className="rounded-circle"
+                />
+            );
         case 4:
-            return <img src='https://icons.veryicon.com/png/o/food--drinks/fresh-1/meat-4.png' alt='NotLoaded' style={{ width: '45px', height: '45px' }} className='rounded-circle' />;
+            return (
+                <img
+                    src="https://icons.veryicon.com/png/o/food--drinks/fresh-1/meat-4.png"
+                    alt="NotLoaded"
+                    style={{ width: "45px", height: "45px" }}
+                    className="rounded-circle"
+                />
+            );
         case 5:
-            return <img src='https://static.vecteezy.com/system/resources/previews/024/244/720/original/dairy-icon-in-illustration-vector.jpg' alt='NotLoaded' style={{ width: '45px', height: '45px' }} className='rounded-circle' />;
+            return (
+                <img
+                    src="https://static.vecteezy.com/system/resources/previews/024/244/720/original/dairy-icon-in-illustration-vector.jpg"
+                    alt="NotLoaded"
+                    style={{ width: "45px", height: "45px" }}
+                    className="rounded-circle"
+                />
+            );
         default:
             return null;
     }
 }
 
-export default function ProductTable({ products, categories}) {
+export default function ProductTable({ products, categories }) {
     //Local storage
     // State to manage your data
-    const [selectedProducts, setSelectedProducts] = useState('');
+    const [selectedProducts, setSelectedProducts] = useState("");
 
     // Effect to load data from local storage on component mount
     useEffect(() => {
-        const storedData = localStorage.getItem('selectedProducts');
+        const storedData = localStorage.getItem("selectedProducts"); // why just selected here?
         if (storedData) {
             // Deserialize the string back into an array
             setSelectedProducts(JSON.parse(storedData));
@@ -37,11 +72,12 @@ export default function ProductTable({ products, categories}) {
     // Update products list and save to local storage
     const updateProductsList = (newData) => {
         setSelectedProducts(newData);
-        localStorage.setItem('myCart', JSON.stringify(newData));
+        localStorage.setItem("myCart", JSON.stringify(newData));
     };
 
     // Buy button click
     const handleBuyClick = (product) => {
+        //you need to walk me through this, names are confusing
         // Ensure selectedProducts is an array
         const currentProducts = Array.isArray(selectedProducts) ? selectedProducts : [];
 
@@ -68,7 +104,7 @@ export default function ProductTable({ products, categories}) {
     const [selectedCategory, setSelectedCategory] = useState(null);
 
     //Assign name input from the input label
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState("");
 
     //Function for setting current category for selectedCategory variable
     const handleCategoryChange = (event) => {
@@ -89,12 +125,11 @@ export default function ProductTable({ products, categories}) {
         return categoryMatch && nameMatch;
     });
 
-
     return (
         <div>
             <label htmlFor="categoryFilter">Filter by Category: </label>
             {/*Assign as selectedCategory or empty string in case selectedCategory is falsy - initial state of null*/}
-            <select id="categoryFilter" onChange={handleCategoryChange} value={selectedCategory || ''}>
+            <select id="categoryFilter" onChange={handleCategoryChange} value={selectedCategory || ""}>
                 <option value="">All</option>
                 {categories.map((category) => (
                     <option key={category.id} value={category.id}>
@@ -106,41 +141,42 @@ export default function ProductTable({ products, categories}) {
             <label htmlFor="nameFilter">Filter by Name: </label>
             <input type="text" id="nameFilter" value={searchTerm} onChange={handleSearchChange} />
 
-
-            <MDBTable align='middle'>
+            <MDBTable align="middle">
                 <MDBTableHead>
                     <tr>
-                        <th scope='col'>Name</th>
-                        <th scope='col'>Description</th>
-                        <th scope='col'>Weight</th>
-                        <th scope='col'>Cost</th>
-                        <th scope='col'>Action</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Weight</th>
+                        <th scope="col">Cost</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </MDBTableHead>
                 <MDBTableBody>
                     {filteredProducts.map((property, index) => (
                         <tr key={index}>
                             <td>
-                                <div className='d-flex align-items-center'>
+                                <div className="d-flex align-items-center">
                                     {switchProductIcon(property.category)}
-                                    <div className='ms-3'>
-                                        <p className='mb-1'>{property.name}</p>
+                                    <div className="ms-3">
+                                        <p className="mb-1">{property.name}</p>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <p className='fw-normal mb-1'>{property.description}</p>
+                                <p className="fw-normal mb-1">{property.description}</p>
                             </td>
                             <td>
-                                <p className='fw-normal mb-1'>{property.weight}</p>
+                                <p className="fw-normal mb-1">{property.weight}</p>
                             </td>
                             <td>
-                                <p className='fw-normal mb-1'>{property.price}</p>
+                                <p className="fw-normal mb-1">{property.price}</p>
                             </td>
                             <td>
-                                <div className='d-flex'>
-                                    <MDBBtn style={{ width: '50px', height: '30px' }}
-                                            onClick={() => handleBuyClick(property)}>
+                                <div className="d-flex">
+                                    <MDBBtn
+                                        style={{ width: "50px", height: "30px" }}
+                                        onClick={() => handleBuyClick(property)}
+                                    >
                                         Buy
                                     </MDBBtn>
                                 </div>

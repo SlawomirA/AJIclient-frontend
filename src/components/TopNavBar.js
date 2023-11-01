@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import '../css/TopNavBar.css';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import "../css/TopNavBar.css";
+import { Link } from "react-router-dom";
 import {
     MDBContainer,
     MDBNavbar,
@@ -9,31 +9,36 @@ import {
     MDBNavbarNav,
     MDBNavbarItem,
     MDBNavbarLink,
-    MDBCollapse, MDBIcon
-} from 'mdb-react-ui-kit';
+    MDBCollapse,
+    MDBIcon,
+} from "mdb-react-ui-kit";
 
 export default function TopNavBar() {
     const [showNav, setShowNav] = useState(false);
 
     return (
-        <MDBNavbar expand='lg' light bgColor='light'>
+        <MDBNavbar expand="lg" light bgColor="light">
             <MDBContainer fluid>
-                <MDBNavbarBrand href='#'>Shop</MDBNavbarBrand>
+                <MDBNavbarBrand href="#">Shop</MDBNavbarBrand>
                 <MDBNavbarToggler
-                    type='button'
-                    aria-expanded='false'
-                    aria-label='Toggle navigation'
+                    type="button"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
                     onClick={() => setShowNav(!showNav)}
                 >
-                    <MDBIcon icon='bars' fas />
+                    <MDBIcon icon="bars" fas />
                 </MDBNavbarToggler>
                 <MDBCollapse navbar show={showNav}>
                     <MDBNavbarNav>
                         <MDBNavbarItem>
-                            <MDBNavbarLink active aria-current='page' href='/'>Products</MDBNavbarLink>
+                            <MDBNavbarLink active aria-current="page" href="/">
+                                Products
+                            </MDBNavbarLink>
                         </MDBNavbarItem>
                         <MDBNavbarItem>
-                            <MDBNavbarLink active aria-current='page' href='/cart'>Cart</MDBNavbarLink>
+                            <MDBNavbarLink active aria-current="page" href="/cart">
+                                Cart
+                            </MDBNavbarLink>
                         </MDBNavbarItem>
                     </MDBNavbarNav>
                 </MDBCollapse>
