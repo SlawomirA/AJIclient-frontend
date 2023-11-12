@@ -126,65 +126,99 @@ export default function ProductTable({ products, categories }) {
     });
 
     return (
-        <div>
-            <label htmlFor="categoryFilter">Filter by Category: </label>
-            {/*Assign as selectedCategory or empty string in case selectedCategory is falsy - initial state of null*/}
-            <select id="categoryFilter" onChange={handleCategoryChange} value={selectedCategory || ""}>
-                <option value="">All</option>
-                {categories.map((category) => (
-                    <option key={category.id} value={category.id}>
-                        {category.name}
-                    </option>
-                ))}
-            </select>
-
-            <label htmlFor="nameFilter">Filter by Name: </label>
-            <input type="text" id="nameFilter" value={searchTerm} onChange={handleSearchChange} />
-
-            <MDBTable align="middle">
-                <MDBTableHead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Weight</th>
-                        <th scope="col">Cost</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </MDBTableHead>
-                <MDBTableBody>
-                    {filteredProducts.map((property, index) => (
-                        <tr key={index}>
-                            <td>
-                                <div className="d-flex align-items-center">
-                                    {switchProductIcon(property.category)}
-                                    <div className="ms-3">
-                                        <p className="mb-1">{property.name}</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p className="fw-normal mb-1">{property.description}</p>
-                            </td>
-                            <td>
-                                <p className="fw-normal mb-1">{property.weight}</p>
-                            </td>
-                            <td>
-                                <p className="fw-normal mb-1">{property.price}</p>
-                            </td>
-                            <td>
-                                <div className="d-flex">
-                                    <MDBBtn
-                                        style={{ width: "50px", height: "30px" }}
-                                        onClick={() => handleBuyClick(property)}
-                                    >
-                                        Buy
-                                    </MDBBtn>
-                                </div>
-                            </td>
-                        </tr>
-                    ))}
-                </MDBTableBody>
-            </MDBTable>
+        <div className="card">
+            <div className="products">
+                <div className="row search-row">
+                    <div className="col-md-4">
+                        <div className="row">
+                            <label className="select-label" htmlFor="categoryFilter">
+                                Category:{" "}
+                            </label>
+                        </div>
+                        <div className="row select-row">
+                            {/*Assign as selectedCategory or empty string in case selectedCategory is falsy - initial state of null*/}
+                            <select
+                                id="categoryFilter"
+                                className="filter"
+                                placeholder="Choose category..."
+                                onChange={handleCategoryChange}
+                                value={selectedCategory || ""}
+                            >
+                                <option value="">All</option>
+                                {categories.map((category) => (
+                                    <option key={category.id} value={category.id}>
+                                        {category.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                    <div className="col-md-4">
+                        <div className="row">
+                            <label className="select-label" htmlFor="nameFilter">
+                                Name:{" "}
+                            </label>
+                        </div>
+                        <div className="row select-row">
+                            <input
+                                type="text"
+                                className="filter"
+                                placeholder="Search..."
+                                id="nameFilter"
+                                value={searchTerm}
+                                onChange={handleSearchChange}
+                            />
+                        </div>
+                    </div>
+                    <div className="col-md-4"></div>
+                </div>
+                <div className="row table-row">
+                    <MDBTable align="middle" className="table-striped">
+                        <MDBTableHead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Weight</th>
+                                <th scope="col">Cost</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </MDBTableHead>
+                        <MDBTableBody>
+                            {filteredProducts.map((property, index) => (
+                                <tr key={index}>
+                                    <td>
+                                        <div className="d-flex align-items-center">
+                                            {switchProductIcon(property.category)}
+                                            <div className="ms-3">
+                                                <p className="mb-1">{property.name}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p className="fw-normal mb-1">{property.description}</p>
+                                    </td>
+                                    <td>
+                                        <p className="fw-normal mb-1">{property.weight}</p>
+                                    </td>
+                                    <td>
+                                        <p className="fw-normal mb-1">{property.price}</p>
+                                    </td>
+                                    <td>
+                                        <div className="d-flex">
+                                            <MDBBtn
+                                                className="outline rounded btn"
+                                                onClick={() => handleBuyClick(property)}
+                                            >
+                                                Buy
+                                            </MDBBtn>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </MDBTableBody>
+                    </MDBTable>
+                </div>
+            </div>
         </div>
     );
 }

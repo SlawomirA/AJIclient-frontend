@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead } from "mdb-react-ui-kit";
 import PersonalDataForm from "./PersonalData";
+import "../css/Cart.css";
 
 function switchProductIcon(category) {
     //Check the category of product and return correct image
@@ -103,79 +104,106 @@ export default function Cart() {
     const totalCost = selectedProducts.reduce((total, product) => total + product.price * product.quantity, 0);
 
     return (
-        //whyyyyyyy className and not class ???????
-        <div>
-            <MDBTable align="middle">
-                <MDBTableHead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Action</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Cost</th>
-                        <th scope="col">Total Price</th>
-                    </tr>
-                </MDBTableHead>
-                <MDBTableBody>
-                    {selectedProducts.map((property, index) => (
-                        <tr key={index}>
-                            <td>
-                                <div className="d-flex align-items-center">
-                                    {switchProductIcon(property.category)}
-                                    <div className="ms-3">
-                                        <p className="mb-1">{property.name}</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div className="d-flex">
-                                    <MDBBtn
-                                        color="success"
-                                        className="btn btn-default btn-work"
-                                        style={{ width: "50px", height: "30px" }}
-                                        onClick={() => handleIncreaseClick(property._id)}
-                                    >
-                                        +
-                                    </MDBBtn>
-                                    <MDBBtn
-                                        color="warning"
-                                        className="text-center"
-                                        style={{ width: "50px", height: "30px" }}
-                                        onClick={() => handleDecreaseClick(property._id)}
-                                    >
-                                        -
-                                    </MDBBtn>
-                                    <MDBBtn
-                                        color="danger"
-                                        className="text-center"
-                                        style={{ width: "50px", height: "30px" }}
-                                        onClick={() => removeProduct(property._id)}
-                                    >
-                                        X
-                                    </MDBBtn>
-                                </div>
-                            </td>
-                            <td>
-                                <p className="fw-normal mb-1">{property.quantity}</p>
-                            </td>
-                            <td>
-                                <p className="fw-normal mb-1">{property.price}</p>
-                            </td>
-                            <td>
-                                <p className="fw-normal mb-1">{property.price * property.quantity}</p>
-                            </td>
+        <div className="cart">
+            <div className="card">
+                <label className="order-sumup-header">Your order</label>
+                <MDBTable align="middle" className="table-striped order-table">
+                    <MDBTableHead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Cost</th>
+                            <th scope="col">Total Price</th>
+                            <th scope="col">Delete</th>
                         </tr>
-                    ))}
-                </MDBTableBody>
-                <tfoot>
-                    <tr>
-                        <td>Total Count</td>
-                        <td>{totalCount}</td>
-                        <td>Total Cost</td>
-                        <td>{totalCost}</td>
-                    </tr>
-                </tfoot>
-            </MDBTable>
-            <PersonalDataForm selectedProducts={selectedProducts} />
+                    </MDBTableHead>
+                    <MDBTableBody>
+                        {selectedProducts.map((property, index) => (
+                            <tr key={index}>
+                                <td>
+                                    <div className="d-flex align-items-center">
+                                        {switchProductIcon(property.category)}
+                                        <div className="ms-3">
+                                            <p className="mb-1">{property.name}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div className="row">
+                                        <div className="col-md-5 lower-quantity">
+                                            <div className="modify-quantity">
+                                                <MDBBtn
+                                                    className="btn quantity-btn lower-quantity-btn"
+                                                    rounded
+                                                    outline
+                                                    onClick={() => handleDecreaseClick(property._id)}
+                                                    disabled={property.quantity === 1}
+                                                    title="decrease amount"
+                                                >
+                                                    <label className="quantity-btn-label">-</label>
+                                                </MDBBtn>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-2 quantity">
+                                            <p className="fw-normal mb-1">{property.quantity}</p>
+                                        </div>
+                                        <div className="col-md-5 add-quantity">
+                                            <div className="modify-quantity">
+                                                <MDBBtn
+                                                    className="btn quantity-btn add-quantity-btn"
+                                                    rounded
+                                                    outline
+                                                    onClick={() => handleIncreaseClick(property._id)}
+                                                    title="increase amount"
+                                                >
+                                                    <label className="quantity-btn-label">+</label>
+                                                </MDBBtn>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p className="fw-normal mb-1">{property.price}</p>
+                                </td>
+                                <td>
+                                    <p className="fw-normal mb-1">{property.price * property.quantity}</p>
+                                </td>
+                                <td>
+                                    <div className="d-flex delete">
+                                        <MDBBtn
+                                            color="danger"
+                                            rounded
+                                            outline
+                                            className="btn quantity-btn"
+                                            onClick={() => removeProduct(property._id)}
+                                            title="delete item from cart"
+                                        >
+                                            <label className="quantity-btn-label">x</label>
+                                        </MDBBtn>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                    </MDBTableBody>
+                    <tfoot className="table-footer">
+                        <tr>
+                            <td>Total Count</td>
+                            <td>
+                                <div className="row">
+                                    <div className="col-md-5"></div>
+                                    <div className="col-md-2 quantity">{totalCount}</div>
+                                    <div className="col-md-5"></div>
+                                </div>
+                            </td>
+                            <td>Total Cost</td>
+                            <td>{totalCost}</td>
+                        </tr>
+                    </tfoot>
+                </MDBTable>
+            </div>
+            <div className="card">
+                <PersonalDataForm selectedProducts={selectedProducts} />
+            </div>
         </div>
     );
 }

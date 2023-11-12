@@ -17,7 +17,7 @@ export default function TopNavBar() {
     const [showNav, setShowNav] = useState(false);
 
     return (
-        <MDBNavbar expand="lg" light bgColor="light">
+        <MDBNavbar className="top-navbar" expand="lg">
             <MDBContainer fluid>
                 <MDBNavbarBrand href="#">Shop</MDBNavbarBrand>
                 <MDBNavbarToggler

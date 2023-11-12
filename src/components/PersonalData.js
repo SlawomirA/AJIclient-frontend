@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { MDBBtn, MDBContainer, MDBRow, MDBCol, MDBInput, MDBModal, MDBModalBody } from "mdb-react-ui-kit";
 import Swal from "sweetalert2";
 import { POST_ODRERS } from "../utils/Urls";
+import "../css/PersonalData.css";
 
 const PersonalDataForm = () => {
     const [formData, setFormData] = useState({
@@ -92,7 +93,7 @@ const PersonalDataForm = () => {
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
-                    text: "We encountered errors while placing an order.\n" + "",
+                    text: "We encountered errors while placing an order.\n",
                     footer: "Order post operation error",
                 });
                 return false;
@@ -111,46 +112,69 @@ const PersonalDataForm = () => {
 
     return (
         <MDBContainer>
-            <MDBRow className="justify-content-center mt-5">
-                <MDBCol md="6">
-                    <form onSubmit={handleSubmit}>
-                        <MDBInput
-                            label="Your Name"
-                            type="text"
-                            id="name"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                        />
-                        <MDBInput
-                            label="Your Email"
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                        />
-                        <MDBInput
-                            label="Your Phone Number"
-                            type="tel"
-                            id="phoneNumber"
-                            name="phoneNumber"
-                            value={formData.phoneNumber}
-                            onChange={handleChange}
-                        />
-                        <div className="text-center mt-4">
-                            <MDBBtn
-                                color="primary"
-                                type="submit"
-                                style={{ width: "100px", height: "60px" }}
-                                onClick={handleMakeOrderClick}
-                            >
-                                Make an order
-                            </MDBBtn>
+            <div className="row">
+                <div className="col-md-12">
+                    <form onSubmit={handleSubmit} className="cart">
+                        <div className="row form-row">
+                            <div className="col-md-3">
+                                <label className="form-label" for="name">
+                                    Your name:
+                                </label>
+                            </div>
+                            <div className="col-md-9">
+                                <MDBInput
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        </div>
+                        <div className="row form-row">
+                            <div className="col-md-3">
+                                <label className="form-label" for="email">
+                                    Your e-mail:
+                                </label>
+                            </div>
+                            <div className="col-md-9">
+                                <MDBInput
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        </div>
+                        <div className="row form-row">
+                            <div className="col-md-3">
+                                <label className="form-label" for="phoneNumber">
+                                    Your phone number:
+                                </label>
+                            </div>
+                            <div className="col-md-9">
+                                <MDBInput
+                                    type="tel"
+                                    id="phoneNumber"
+                                    name="phoneNumber"
+                                    value={formData.phoneNumber}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col-md-10"></div>
+                            <div className="col-md-2">
+                                <MDBBtn type="submit" className="btn order-btn" onClick={handleMakeOrderClick}>
+                                    <label className="order-btn-label">Order</label>
+                                </MDBBtn>
+                            </div>
                         </div>
                     </form>
-                </MDBCol>
-            </MDBRow>
+                </div>
+            </div>
         </MDBContainer>
     );
 };

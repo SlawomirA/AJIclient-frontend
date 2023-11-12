@@ -41,11 +41,15 @@ function App() {
     return (
         <div className="App">
             <TopNavBar />
-            <header className="App-header w-75">
-                <Routes>
-                    <Route path="/" element={<ProductTable products={products} categories={categories} />} />
-                    <Route path="/cart" element={<Cart />} />
-                </Routes>
+            <header className="App-header">
+                <div className="row">
+                    <div className="col-md-12">
+                        <Routes>
+                            <Route path="/" element={<ProductTable products={products} categories={categories} />} />
+                            <Route path="/cart" element={<Cart />} />
+                        </Routes>
+                    </div>
+                </div>
             </header>
         </div>
     );

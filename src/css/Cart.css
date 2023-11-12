@@ -1,0 +1,71 @@
+.order-sumup-header{
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: underline;
+    padding-bottom: 10px;
+}
+
+.order-table{
+    .quantity-btn{
+        height: 25px;
+        width: 25px;
+        padding: 5px;
+        padding-top: 1px;
+        .quantity-btn-label{
+            align-content: center;
+            display: flex;
+            font-weight: 1000;
+            justify-content: center;
+            line-height: 5px;
+        }
+    }
+    .lower-quantity{
+        align-content: end;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .quantity, .delete{
+        align-content: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .add-quantity{
+        align-content: start;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .lower-quantity-btn{
+        border-color: #3d8df5;
+        color: #3d8df5;
+    }
+    .lower-quantity-btn:hover{
+        border-color: #266cc7;
+        background-color: #266cc7;
+        color: white;
+    }
+    .add-quantity-btn{
+        border-color: #33f279;
+        color: #33f279;
+    }
+    .add-quantity-btn:hover{
+        border-color: #26c761;
+        background-color: #26c761;
+        color: white;
+    }
+    
+
+}
+.cart{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .order-btn{
+        float: right;
+    }
+}
