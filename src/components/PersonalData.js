@@ -35,15 +35,10 @@ const PersonalDataForm = () => {
     };
 
     const handleInput = (e) => {
-        console.log(e.target);
         const { name, value } = e.target;
         let element = document.getElementById(name);
         if (name === "name") {
-            console.log("name: ", value.length);
-            console.log(e.target.parentElement);
-            console.log(element, element.classList);
             if (value.length == 0) {
-                console.log("len 0");
                 if (!element.classList.contains("is-invalid")) {
                     element.classList.add("is-invalid");
                 }
@@ -52,7 +47,6 @@ const PersonalDataForm = () => {
                 }
                 setFeedbackName("Name cannot be empty");
             } else if (value.length < 6) {
-                console.log("len<6");
                 if (!element.classList.contains("is-invalid")) {
                     element.classList.add("is-invalid");
                 }
@@ -67,10 +61,8 @@ const PersonalDataForm = () => {
                 setFeedbackName("");
             }
         } else if (name === "email") {
-            console.log("email");
             const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (value.length == 0) {
-                console.log("email len 0");
                 if (!element.classList.contains("is-invalid")) {
                     element.classList.add("is-invalid");
                 }
@@ -93,7 +85,6 @@ const PersonalDataForm = () => {
                 setFeedbackEmail("E-mail not valid");
             }
         } else if (name === "phoneNumber") {
-            console.log("phone");
             const phoneRegex = /(?<!\w)(\(?(\+|00)?48\)?)?[ -]?\d{3}[ -]?\d{3}[ -]?\d{3}(?!\w)/;
             if (value.length == 0) {
                 if (!element.classList.contains("is-invalid")) {
@@ -122,8 +113,7 @@ const PersonalDataForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        //ok but what's the point of this???
-        console.log("Form submitted:", formData);
+        //console.log("Form submitted:", formData);
     };
 
     const handleMakeOrderClick = () => {

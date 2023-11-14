@@ -21,4 +21,24 @@
         }
     }
 
+    .menu,.menu:active, .menu:visited, .menu:focus{
+        border-bottom: 3px solid white;
+        border-top: 3px solid white;
+        border-left: 0px;
+        border-right: 0px;
+        border-radius: 0px;
+        padding: 0px;
+        padding-top: 3px;
+        color:white;
+        font-weight: 800;
+        line-height: 3px;
+        outline: 0;
+        box-shadow: 0 0 0 0;
+        
+    }
+    
+    
+    .collapse{
+        margin-bottom: 20px;
+    }
 }

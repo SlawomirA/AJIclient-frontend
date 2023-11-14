@@ -25,8 +25,9 @@ export default function TopNavBar() {
                     aria-expanded="false"
                     aria-label="Toggle navigation"
                     onClick={() => setShowNav(!showNav)}
+                    className="menu"
                 >
-                    <MDBIcon icon="bars" fas />
+                    __
                 </MDBNavbarToggler>
                 <MDBCollapse navbar show={showNav}>
                     <MDBNavbarNav>
