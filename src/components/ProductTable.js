@@ -62,7 +62,7 @@ export default function ProductTable({ products, categories }) {
 
     // Effect to load data from local storage on component mount
     useEffect(() => {
-        const storedData = localStorage.getItem("selectedProducts"); // why just selected here?
+        const storedData = localStorage.getItem("selectedProducts");
         if (storedData) {
             // Deserialize the string back into an array
             setSelectedProducts(JSON.parse(storedData));
